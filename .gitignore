@@ -1,6 +1,10 @@
 *.py[cod]
+*.DS_Store
+.DS_Store
 
 build
 devel
 
 profile.tmp
+.DS_Store
+.DS_Store
