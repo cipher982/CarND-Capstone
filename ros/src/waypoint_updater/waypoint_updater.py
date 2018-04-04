@@ -47,7 +47,7 @@ class WaypointUpdater(object):
         self.waypoint_tree  = None
 
 
-        rospy.loop()
+        self.loop()
         
     def loop(self):
         rate = rospy.Rate(50)
