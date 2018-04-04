@@ -59,10 +59,10 @@ class WaypointUpdater(object):
             rate.sleep()
 
     def pose_cb(self, msg):
-        self.current_pose = msg.pose
+        self.current_pose = msg
 
     def waypoints_cb(self, waypoints):
-        self.waypoints = msg.waypoints
+        self.waypoints = waypoints
         # TODO: Implement
         if not self.waypoints_2d:
             self.waypoints_2d = [[waypoint.pose.position.x, waypoint.pose.position.y] \
