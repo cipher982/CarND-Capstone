@@ -105,11 +105,11 @@ class WaypointUpdater(object):
         prev_coord    = self.waypoints_2d[closest_idx-1]
 
         # equation for hyperplane trough closest_coord(s)
-        closest_vect  = np.array(closest_coord)
-        prev_vect     = np.array(prev_coord)
-        position_vect = np.array([x, y])
+        cl_vect   = np.array(closest_coord)
+        prev_vect = np.array(prev_coord)
+        pos_vect  = np.array([x, y])
 
-        value = np.dot(closest_vect - prev_vect, position_vect - closest_vect)
+        value = np.dot(cl_vect - prev_vect, pos_vect - cl_vect)
 
         if value > 0:
             closest_idx = (closest_idx + 1) % len(self.waypoints_2d)
