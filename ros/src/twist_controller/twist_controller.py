@@ -27,7 +27,7 @@ class Controller(object):
     	# LowPass Filter
     	tau = 0.5  # cutoff frequency
     	ts  = 0.02 # sample time
-    	self.vel_lpf = LowPassFilter(tau , ts)
+    	self.vel_lpf = LowPassFilter(tau, ts)
 
     	self.vehicle_mass   = vehicle_mass
         self.fuel_capacity  = fuel_capacity
@@ -45,7 +45,7 @@ class Controller(object):
     		self.throttle_controller.reset()
         	return 0., 0., 0.
 
-        current_vel = self.vel_lpf(current_vel)
+        current_vel = self.vel_lpf.filt(current_vel)
 
         steering = self.yaw_controller.get_steering(linear_vel, angular_vel, current_vel)
        
