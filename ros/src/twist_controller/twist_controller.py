@@ -11,8 +11,8 @@ ONE_MPH     = 0.44704
 
 
 class Controller(object):
-    def __init__(self, vehicle_mass, fuel_capacity, brake_deadband, decel_limit, accel_limit,
-    	         wheel_radius, wheel_base, steer_ratio, max_lat_accel, max_steer_angle):
+    def __init__(self, vehicle_mass, fuel_capacity, brake_deadband, decel_limit, accel_limit,\
+    	wheel_radius, wheel_base, steer_ratio, max_lat_accel, max_steer_angle):
 
     	self.yaw_controller = YawController(wheel_base, steer_ratio, 0.3, max_lat_accel, max_steer_angle)
 
@@ -29,7 +29,7 @@ class Controller(object):
     	ts  = 0.02 # sample time
     	self.vel_lpf = LowPassFilter(tau , ts)
 
- 		self.vehicle_mass   = vehicle_mass
+    	self.vehicle_mass   = vehicle_mass
         self.fuel_capacity  = fuel_capacity
         self.brake_deadband = brake_deadband
         self.decel_limit    = decel_limit
