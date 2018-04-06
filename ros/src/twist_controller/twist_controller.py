@@ -57,7 +57,7 @@ class Controller(object):
         self.last_time = current_time
 
         # hit the gas
-        throttle = self.throttle_controller.step(vel error, sample_time)
+        throttle = self.throttle_controller.step(vel_error, sample_time)
         brake = 0
 
         # if at a stop, hold brake
