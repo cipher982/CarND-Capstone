@@ -79,7 +79,7 @@ class TLDetector(object):
         used.
         '''
         if self.state         != state:
-            self.    = 0
+            self.state_count   = 0
             self.state         = state
         elif self.state_count >= STATE_COUNT_THRESHOLD:
             self.last_state    = self.state
