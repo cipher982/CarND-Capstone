@@ -17,12 +17,12 @@ class Controller(object):
     	self.yaw_controller = YawController(wheel_base, steer_ratio, 0.1, max_lat_accel, max_steer_angle)
 
     	# PID Controller
-    	kp = 0.3
-    	ki = 0.1
+    	kp = 1.0
+    	ki = 0.005
     	kd = 0.0
     	mn = 0.0 # min
-    	mx = 2.0 # max
-    	self.throttle_controller = PID(kp, ki, mn, mx)
+    	mx = 1.0 # max
+    	self.throttle_controller = PID(kp, ki, kd)
 
     	# LowPass Filter
     	tau = 0.5  # cutoff frequency
