@@ -45,7 +45,7 @@ class WaypointUpdater(object):
         # TODO: Add other member variables you need below
 
         # initialize
-        self.pose            = None
+        self.current_pose    = None
         self.base_waypoints  = None
         self.waypoints_2d    = None
         self.waypoint_tree   = None
@@ -58,7 +58,7 @@ class WaypointUpdater(object):
     def loop(self):
         rate = rospy.Rate(50)
         while not rospy.is_shutdown():
-            if self.pose and self.base_lane:
+            if self.current_pose and self.base_lane:
                 self.publish_waypoints()
             rate.sleep()
 
@@ -71,7 +71,7 @@ class WaypointUpdater(object):
         closest_coord = self.waypoints_2d[closest_idx]
         prev_coord    = self.waypoints_2d[closest_idx-1]
 
-        # equation for hyperplane trough closest_coord(s)
+        # equation for hyperplane through closest_coord(s)
         cl_vect   = np.array(closest_coord)
         prev_vect = np.array(prev_coord)
         pos_vect  = np.array([x, y])
