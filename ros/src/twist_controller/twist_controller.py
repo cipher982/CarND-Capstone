@@ -61,9 +61,9 @@ class Controller(object):
         brake    = 0
 
         # if at a stop, hold brake
-        #if linear_vel == 0 and current_vel < 0.1:
-        #	throttle = 0
-        #	brake    = 400
+        if linear_vel == 0 and current_vel < 0.1:
+        	throttle = 0
+        	brake    = 400
 
         #if linear_vel > 0 and current_vel > 0:
         #	throttle = 900
