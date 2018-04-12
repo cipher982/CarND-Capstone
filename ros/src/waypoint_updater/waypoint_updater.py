@@ -43,6 +43,7 @@ class WaypointUpdater(object):
 
 
         # initialize
+        self.pose            = None
         self.current_pose    = None
         self.base_waypoints  = None
         self.waypoints_2d    = None
@@ -80,7 +81,7 @@ class WaypointUpdater(object):
 
         if val > 0:
             closest_idx = (closest_idx + 1) % len(self.waypoints_2d)
-            
+
         return closest_idx
 
     #def publish_waypoints(self, closest_idx):
@@ -127,7 +128,7 @@ class WaypointUpdater(object):
 
 
     def pose_cb(self, msg):
-        self.current_pose = msg
+        self.pose = msg
 
     def waypoints_cb(self, waypoints):
         self.base_lane = waypoints
