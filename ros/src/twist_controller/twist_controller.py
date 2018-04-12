@@ -58,12 +58,12 @@ class Controller(object):
 
         # hit the gas
         throttle = self.throttle_controller.step(vel_error, sample_time)
-        brake = 0
+        brake    = 0
 
         # if at a stop, hold brake
-        if linear_vel == 0 and current_vel < 0.1:
-        	throttle = 0
-        	brake    = 400
+        #if linear_vel == 0 and current_vel < 0.1:
+        #	throttle = 0
+        #	brake    = 400
 
         #if linear_vel > 0 and current_vel > 0:
         #	throttle = 900
@@ -73,8 +73,8 @@ class Controller(object):
         # if too fast
         elif throttle < 0.1 and vel_error < 0:
         	throttle = 0
-        	decel = max(vel_error, self.decel_limit)
-        	brake = abs(decel) * self.vehicle_mass * self.wheel_radius # torque in N*m
+        	decel    = max(vel_error, self.decel_limit)
+        	brake    = abs(decel) * self.vehicle_mass * self.wheel_radius # torque in N*m
 
         return throttle, brake, steering
 
