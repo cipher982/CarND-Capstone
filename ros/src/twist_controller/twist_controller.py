@@ -14,14 +14,14 @@ class Controller(object):
     def __init__(self, vehicle_mass, fuel_capacity, brake_deadband, decel_limit, accel_limit,\
     	wheel_radius, wheel_base, steer_ratio, max_lat_accel, max_steer_angle):
 
-    	self.yaw_controller = YawController(wheel_base, steer_ratio, 0.3, max_lat_accel, max_steer_angle)
+    	self.yaw_controller = YawController(wheel_base, steer_ratio, 0.1, max_lat_accel, max_steer_angle)
 
     	# PID Controller
     	kp = 0.3
     	ki = 0.1
     	kd = 0.0
     	mn = 0.0 # min
-    	mx = 1.0 # max
+    	mx = 2.0 # max
     	self.throttle_controller = PID(kp, ki, mn, mx)
 
     	# LowPass Filter
