@@ -78,16 +78,19 @@ class TLDetector(object):
         of times till we start using it. Otherwise the previous stable state is
         used.
         '''
-        if self.state         != state:
+        if self.state != state:
             self.state_count   = 0
             self.state         = state
+
         elif self.state_count >= STATE_COUNT_THRESHOLD:
-            self.last_state    = self.state
-            light_wp           = light_wp if state == TrafficLight.RED else -1
-            self.last_wp       = light_wp
+            self.last_state = self.state
+            light_wp        = light_wp if state == TrafficLight.RED else -1
+            self.last_wp    = light_wp
             self.upcoming_red_light_pub.publish(Int32(light_wp))
+
         else:
             self.upcoming_red_light_pub.publish(Int32(self.last_wp))
+            
         self.state_count += 1
 
     def get_closest_waypoint(self, pose):
@@ -140,16 +143,17 @@ class TLDetector(object):
         stop_line_positions = self.config['stop_line_positions']
         if(self.pose):
             car_wp_idx  = self.get_closest_waypoint(self.pose.pose.position.x, self.pose.pose.position.y)
+            diff        = len(self.waypoints.waypoints)
 
-            diff = len(self.waypoints.waypoints)
             for i, light in enumerate(self.lights):
-                line = stop_line_positions[i]
+                line          = stop_line_positions[i]
                 temp_wp_index = self.get_closest_waypoint(line[0], line[1])
-                d = temp_wp_idx - car_wp_idx
+                d             = temp_wp_idx - car_wp_idx
+
                 if d >= 0 and d < diff:
-                    diff = d
+                    diff          = d
                     closest_light = light
-                    line_wp_idx = temp_wp_idx
+                    line_wp_idx   = temp_wp_idx
 
         if closest_light:
             state = self.get_light_state(closest_light)
@@ -162,3 +166,15 @@ if __name__ == '__main__':
         TLDetector()
     except rospy.ROSInterruptException:
         rospy.logerr('Could not start traffic node.')
+
+
+
+
+
+
+
+
+
+
+
+
