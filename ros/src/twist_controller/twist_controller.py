@@ -19,7 +19,7 @@ class Controller(object):
 
     	# PID Controller
     	kp = 1
-    	ki = 0.2
+    	ki = 0.005
     	kd = 0.2
     	mn = 0.0 # min
     	mx = 1.0 # max
