@@ -39,7 +39,7 @@ class WaypointUpdater(object):
         while not rospy.is_shutdown():
             if self.pose and self.base_lane:
                 self.publish_waypoints()
-                self.traffic_cb()
+                #self.traffic_cb()
             rate.sleep()
 
     def get_closest_waypoint_idx(self):
