@@ -82,14 +82,14 @@ class TLDetector(object):
         if self.state != state:
             self.state_count   = 0
             self.state         = state
-
         elif self.state_count >= STATE_COUNT_THRESHOLD:
             self.last_state = self.state
             light_wp        = light_wp if state == TrafficLight.RED else -1
             self.last_wp    = light_wp
+            rospy.logwarn("publishing light1")
             self.upcoming_red_light_pub.publish(Int32(light_wp))
-
         else:
+            rospy.logwarn("publishing light2")
             self.upcoming_red_light_pub.publish(Int32(self.last_wp))
             
         self.state_count += 1
@@ -160,6 +160,7 @@ class TLDetector(object):
             state = self.get_light_state(closest_light)
             return light_wp_idx, state
 
+        rospy.logwarn("Traffic light unknown")
         return -1, TrafficLight.UNKNOWN
 
 if __name__ == '__main__':
