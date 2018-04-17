@@ -40,7 +40,8 @@ class WaypointUpdater(object):
             if self.pose and self.base_lane:
                 self.publish_waypoints()
             else:
-                rospy.logwarn("No self.pose or self.base_lane data")
+                #rospy.logwarn("No self.pose or self.base_lane data")
+                1+1
             rate.sleep()
 
     def get_closest_waypoint_idx(self):
