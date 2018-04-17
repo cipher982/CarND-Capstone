@@ -39,9 +39,6 @@ class WaypointUpdater(object):
         while not rospy.is_shutdown():
             if self.pose and self.base_lane:
                 self.publish_waypoints()
-            else:
-                #rospy.logwarn("No self.pose or self.base_lane data")
-                1+1
             rate.sleep()
 
     def get_closest_waypoint_idx(self):
@@ -83,14 +80,16 @@ class WaypointUpdater(object):
         base_waypoints = self.base_lane.waypoints[closest_idx:farthest_idx]
 
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >= farthest_idx):
+            # clear, keep going
             lane.waypoints = base_waypoints
         else:
+            # not clear, slow down
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
 
         return lane
 
     def decelerate_waypoints(self, waypoints, closest_idx):
-        print("Calling decelerate_waypoints()")
+        rospy.logwarn("Calling decelerate_waypoints(), closest_idx:{0".format(closest_idx))
         temp = []
         for i, wp in enumerate(waypoints):
             p      = Waypoint()
@@ -108,7 +107,6 @@ class WaypointUpdater(object):
 
         return temp
 
-
     def pose_cb(self, msg):
         self.pose = msg
 
@@ -121,7 +119,7 @@ class WaypointUpdater(object):
 
     def traffic_cb(self, msg):
         self.stopline_wp_idx = msg.data
-        rospy.logwarn("Traffic waypoint calle:{0}".format(msg.data))
+        rospy.logwarn("Traffic waypoint called:{0}".format(msg.data))
 
     def obstacle_cb(self, msg):
         # TODO: Callback for /obstacle_waypoint message. We will implement it later
