@@ -1,4 +1,5 @@
-from pid            import PID
+
+    from pid            import PID
 from lowpass        import LowPassFilter
 from yaw_controller import YawController
 
@@ -18,8 +19,8 @@ class Controller(object):
 
     	# PID Controller
     	kp = 1
-    	ki = 0.005
-    	kd = 0.0
+    	ki = 0.2
+    	kd = 0.2
     	mn = 0.0 # min
     	mx = 1.0 # max
     	self.throttle_controller = PID(kp, ki, kd)
