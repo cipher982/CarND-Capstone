@@ -7,24 +7,7 @@ from styx_msgs.msg     import Lane, Waypoint
 from std_msgs.msg      import Int32
 from scipy.spatial     import KDTree
 
-
-
 import math
-
-'''
-This node will publish waypoints from the car's current position to some `x` distance ahead.
-
-As mentioned in the doc, you should ideally first implement a version which does not care
-about traffic lights or obstacles.
-
-Once you have created dbw_node, you will update this node to use the status of traffic lights too.
-
-Please note that our simulator also provides the exact location of traffic lights and their
-current status in `/vehicle/traffic_lights` message. You can use this message to build this node
-as well as to verify your TL classifier.
-
-TODO (for Yousuf and Aaron): Stopline location for each traffic light.
-'''
 
 LOOKAHEAD_WPS = 200 # Number of waypoints we will publish. You can change this number
 MAX_DECEL = .5
@@ -57,7 +40,7 @@ class WaypointUpdater(object):
             if self.pose and self.base_lane:
                 self.publish_waypoints()
             else:
-                print("Not calling 'publish_waypoints()")
+                rospy.logwarn("Not self.pose or self.base_lane")
             rate.sleep()
 
     def get_closest_waypoint_idx(self):
@@ -137,6 +120,7 @@ class WaypointUpdater(object):
 
     def traffic_cb(self, msg):
         self.stopline_wp_idx = msg.data
+        rospy.logwarn("Traffic waypoint calle:{0}".format(msg.data))
 
     def obstacle_cb(self, msg):
         # TODO: Callback for /obstacle_waypoint message. We will implement it later
