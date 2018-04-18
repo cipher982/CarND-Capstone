@@ -84,6 +84,7 @@ class WaypointUpdater(object):
             lane.waypoints = base_waypoints
         else:
             # not clear, slow down
+            rospy.loginfo("applying decel waypoints!")
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
 
         return lane
