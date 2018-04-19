@@ -136,6 +136,7 @@ class TLDetector(object):
         return closest_index
 
     def get_light_state(self):
+        rospy.logwarn("get_light_state. . .")
         """Determines the current color of the traffic light
 
         Returns:
@@ -153,6 +154,7 @@ class TLDetector(object):
         return self.light_classifier.get_classification(cv_image)
 
     def process_traffic_lights(self):
+        rospy.logwarn("process_traffic_lights. . .")
         """Finds closest visible traffic light, if one exists, and determines its
             location and color
 
