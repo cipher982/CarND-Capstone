@@ -103,6 +103,7 @@ class TLDetector(object):
         of times till we start using it. Otherwise the previous stable state is
         used.
         '''
+        rospy.logwarn("image_cb state:{0}, self.state:{1}".format(state,self.state))
         if self.state != state:
             self.state_count = 0
             self.state = state
