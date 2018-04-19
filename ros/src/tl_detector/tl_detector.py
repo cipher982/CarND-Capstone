@@ -165,6 +165,8 @@ class TLDetector(object):
         """
         light_wp = None
 
+        rospy.logwarn("self.pose{0}    self.waypoints{1}    self.car_waypoint_id{2}".\
+            format(self.pose, self.waypoints, self.car_waypoint_id))
         if(self.pose and self.waypoints and self.car_waypoint_id):
             rospy.logwarn("self.pose and self.waypoints and self.car_waypoint_id == TRUE")
 
