@@ -3,18 +3,18 @@ import tensorflow as tf
 import os
 import numpy as np
 import rospy
+import time
 from functools import partial
 import cv2
 from random import randint
 from keras.models import load_model
 
+
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 class TLClassifier(object):
     def __init__(self):
-        #TODO load classifier
         # load the graph
-        
         self.model = load_model(DIR_PATH + '/sim-classifier-8.h5')
         self.model._make_predict_function() 
         self.graph = tf.get_default_graph()
@@ -23,7 +23,6 @@ class TLClassifier(object):
         self.light_state = TrafficLight.UNKNOWN
 
     def get_classification(self, image):
-        
         """Determines the color of the traffic light in the image
 
         Args:
@@ -33,14 +32,18 @@ class TLClassifier(object):
             int: ID of traffic light color (specified in styx_msgs/TrafficLight)
 
         """
-        #TODO implement light color prediction
-
         # prediction key
-        classification_tl_key = {0: TrafficLight.RED, 1: TrafficLight.YELLOW, 2: TrafficLight.GREEN, 4: TrafficLight.UNKNOWN}
+        classification_tl_key = {0: TrafficLight.RED,
+                                 1: TrafficLight.YELLOW,
+                                 2: TrafficLight.GREEN,
+                                 4: TrafficLight.UNKNOWN}
 
         resized = cv2.resize(image, (80,60))/255.
-
         test_img = np.array([resized])
+        rospy.logwarn("resized cam image, saving. . .")
+        time = time.time()
+        cv2.imwrite('IMG_{0}.png'.format(time))
+
         # run the prediction
         with self.graph.as_default():
             model_predict = self.model.predict(test_img)
