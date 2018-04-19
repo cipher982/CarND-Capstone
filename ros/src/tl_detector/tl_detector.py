@@ -76,6 +76,7 @@ class TLDetector(object):
         rospy.spin()
 
     def car_waypoint_id_cb(self, msg):
+        rospy.logwarn("car_waypoint_id_cb. . .")
         self.car_waypoint_id = msg.data
 
     def pose_cb(self, msg):
@@ -165,7 +166,7 @@ class TLDetector(object):
         """
         light_wp = None
 
-        
+
         if(self.pose and self.waypoints and self.car_waypoint_id):
             rospy.logwarn("self.pose and self.waypoints and self.car_waypoint_id == TRUE")
 
