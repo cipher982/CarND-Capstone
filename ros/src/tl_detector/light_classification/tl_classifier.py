@@ -41,8 +41,8 @@ class TLClassifier(object):
         resized = cv2.resize(image, (80,60))/255.
         test_img = np.array([resized])
         rospy.logwarn("resized cam image, saving. . .")
-        time = time.time()
-        cv2.imwrite('IMG_{0}.png'.format(time))
+        timeNow = time.time()
+        cv2.imwrite('IMG_{0}.png'.format(timeNow))
 
         # run the prediction
         with self.graph.as_default():
