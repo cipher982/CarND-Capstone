@@ -81,17 +81,17 @@ class WaypointUpdater(object):
 
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >= farthest_idx):
             # clear, keep going
-            rospy.logwarn("using normal waypoints!")
+            rospy.logwarn("using normal waypoints! stopline_wp_idx:{0}, farthest_idx:{1}".\
+                format(stopline_wp_idx,farthest_idx))
             lane.waypoints = base_waypoints
         else:
             # not clear, slow down
-            rospy.logwarn("applying decel waypoints!")
+            rospy.logwarn("applying decel waypoints! closest_idx:{0}".format(closest_idx))
             lane.waypoints = self.decelerate_waypoints(base_waypoints, closest_idx)
 
         return lane
 
     def decelerate_waypoints(self, waypoints, closest_idx):
-        rospy.logwarn("Calling decelerate_waypoints(), closest_idx:{0".format(closest_idx))
         temp = []
         for i, wp in enumerate(waypoints):
             p      = Waypoint()
