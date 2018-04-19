@@ -166,6 +166,7 @@ class TLDetector(object):
         light_wp = None
 
         if(self.pose and self.waypoints and self.car_waypoint_id):
+            rospy.logwarn("self.pose and self.waypoints and self.car_waypoint_id == TRUE")
 
             for index, stop_line, stop_line_wp in self.stop_line_cache:
                 num_wp_ahead = stop_line_wp - self.car_waypoint_id
@@ -177,7 +178,6 @@ class TLDetector(object):
                     if ( math.sqrt( (self.pose.pose.position.x - stop_line[0])**2 + (self.pose.pose.position.y - stop_line[1])**2) < 100 ):
                         light_wp = stop_line_wp
 
-        rospy.logwarn("process_traffic_lights(), light_wp:{0}".format(light_wp))
         if light_wp is not None:
             state = self.get_light_state()
             # for saving imgs from sim
