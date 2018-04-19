@@ -81,6 +81,7 @@ class WaypointUpdater(object):
 
         if self.stopline_wp_idx == -1 or (self.stopline_wp_idx >= farthest_idx):
             # clear, keep going
+            rospy.logwarn("using normal waypoints!")
             lane.waypoints = base_waypoints
         else:
             # not clear, slow down
