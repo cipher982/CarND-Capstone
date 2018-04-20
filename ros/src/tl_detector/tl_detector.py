@@ -76,7 +76,7 @@ class TLDetector(object):
         rospy.spin()
 
     def car_waypoint_id_cb(self, msg):
-        rospy.logwarn("car_waypoint_id_cb. . .")
+        rospy.logwarn("car_waypoint_id_cb:{0}".format(msg.data))
         self.car_waypoint_id = msg.data
 
     def pose_cb(self, msg):

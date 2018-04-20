@@ -26,11 +26,15 @@ class WaypointUpdater(object):
         self.stopline_wp_idx = -1
         self.final_waypoints = Lane()
 
+        self.closest_wp      = None
+
         rospy.Subscriber('/current_pose', PoseStamped, self.pose_cb)
         rospy.Subscriber('/base_waypoints', Lane, self.waypoints_cb)
         rospy.Subscriber('/traffic_waypoint', Int32, self.traffic_cb)
 
         self.final_waypoints_pub = rospy.Publisher('/final_waypoints', Lane, queue_size=1)
+        #self.driving_mode_pub    = rospy.Publisher('/driving_mode', Int32, queue_size=1)
+        self.car_waypoint_id_pub = rospy.Publisher('/car_waypoint_id', Int32, queue_size=1)
 
         self.loop()
         
@@ -60,6 +64,8 @@ class WaypointUpdater(object):
         if val > 0:
             closest_idx = (closest_idx + 1) % len(self.waypoints_2d)
 
+        self.closest_wp = closest_idx
+
         return closest_idx
 
     #def publish_waypoints(self, closest_idx):
@@ -67,10 +73,6 @@ class WaypointUpdater(object):
     #    lane.header    = self.base_waypoints.header
     #    lane.waypoints = self.base_waypoints.waypoints[closest_idx:closest_idx + LOOKAHEAD_WPS]
     #    self.final_waypoints_pub.publish(lane)
-
-    def publish_waypoints(self):
-        final_lane = self.generate_lane()
-        self.final_waypoints_pub.publish(final_lane)
 
     def generate_lane(self):
         lane = Lane()
@@ -141,7 +143,12 @@ class WaypointUpdater(object):
             wp1   = i
         return dist
 
+    def publish_waypoints(self):
+        final_lane = self.generate_lane()
+        self.final_waypoints_pub.publish(final_lane)
 
+        if self.closest_wp is not None:
+            self.car_waypoint_id_pub.publish(self.closest_wp)
 
 
 if __name__ == '__main__':
