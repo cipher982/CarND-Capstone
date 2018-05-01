@@ -50,6 +50,8 @@ class TLDetector(object):
         self.classifier_model = rospy.get_param("classification_model")
 
         self.bridge = CvBridge()
+
+        # uncomment if using actual car (carla)
         #if self.classifier_model == "sim_classifier":
         #    self.light_classifier = TLClassifier()
         #else:
