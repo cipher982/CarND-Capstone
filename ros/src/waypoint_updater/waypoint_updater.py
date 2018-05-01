@@ -96,7 +96,7 @@ class WaypointUpdater(object):
     def decelerate_waypoints(self, waypoints, closest_idx):
         temp = []
         for i, wp in enumerate(waypoints):
-            rospy.logwarn("wp:{0".format(wp))
+            rospy.logwarn("wp:{0}".format(wp))
             p      = Waypoint()
             p.pose = wp.pose()
 
