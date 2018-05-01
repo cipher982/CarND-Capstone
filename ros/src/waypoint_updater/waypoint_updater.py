@@ -110,10 +110,10 @@ class WaypointUpdater(object):
 
             stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0) # 2 is arbt
             dist     = self.distance(waypoints, i, stop_idx)
-            #vel      = math.sqrt(2 * MAX_DECEL * dist)
-            vel      = dist * .85
+            vel      = math.sqrt(2 * MAX_DECEL * dist)
+            #vel      = dist * .85
 
-            if vel < 20.0:
+            if vel < 1.0:
                 vel = 0.0
 
             p.twist.twist.linear.x = min(vel, wp.twist.twist.linear.x)
