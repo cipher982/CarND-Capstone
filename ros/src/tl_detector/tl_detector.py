@@ -139,7 +139,7 @@ class TLDetector(object):
         return closest_index
 
     def get_light_state(self):
-        rospy.logwarn("get_light_state. . .")
+        #rospy.logwarn("get_light_state. . .")
         """Determines the current color of the traffic light
 
         Returns:
@@ -157,7 +157,7 @@ class TLDetector(object):
         return self.light_classifier.get_classification(cv_image)
 
     def process_traffic_lights(self):
-        rospy.logwarn("process_traffic_lights. . .")
+        #rospy.logwarn("process_traffic_lights. . .")
         """Finds closest visible traffic light, if one exists, and determines its
             location and color
 
@@ -170,8 +170,6 @@ class TLDetector(object):
 
 
         if(self.pose and self.waypoints and self.car_waypoint_id):
-            rospy.logwarn("self.pose and self.waypoints and self.car_waypoint_id == TRUE")
-
             for index, stop_line, stop_line_wp in self.stop_line_cache:
                 num_wp_ahead = stop_line_wp - self.car_waypoint_id
                 if num_wp_ahead < 0:
