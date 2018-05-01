@@ -6,6 +6,7 @@ from geometry_msgs.msg import PoseStamped
 from styx_msgs.msg     import Lane, Waypoint
 from std_msgs.msg      import Int32
 from scipy.spatial     import KDTree
+from time              import sleep
 
 import math
 
@@ -77,7 +78,13 @@ class WaypointUpdater(object):
     def generate_lane(self):
         lane = Lane()
 
-        closest_idx    = self.get_closest_waypoint_idx()
+        closest_idx = None
+        while closest_idx is None:
+            try:
+                closest_idx = self.get_closest_waypoint_idx()
+            except AttributeError as error:
+                pass
+
         farthest_idx   = closest_idx + LOOKAHEAD_WPS
         base_waypoints = self.base_lane.waypoints[closest_idx:farthest_idx]
 
