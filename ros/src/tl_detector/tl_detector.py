@@ -78,7 +78,7 @@ class TLDetector(object):
         rospy.spin()
 
     def car_waypoint_id_cb(self, msg):
-        rospy.logwarn("car_waypoint_id_cb:{0}".format(msg.data))
+        #rospy.logwarn("car_waypoint_id_cb:{0}".format(msg.data))
         self.car_waypoint_id = msg.data
 
     def pose_cb(self, msg):
@@ -108,7 +108,7 @@ class TLDetector(object):
         of times till we start using it. Otherwise the previous stable state is
         used.
         '''
-        rospy.logwarn("image_cb state:{0}, self.state:{1}".format(state,self.state))
+        #rospy.logwarn("image_cb state:{0}, self.state:{1}".format(state,self.state))
         if self.state != state:
             self.state_count = 0
             self.state = state
