@@ -99,7 +99,7 @@ class WaypointUpdater(object):
         for i, wp in enumerate(waypoints):
             rospy.logwarn("wp:{0}".format(wp))
             p      = Waypoint()
-            p.pose = wp.pose()
+            p.pose = wp.pose
 
             stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0) # 2 is arbt
             dist     = self.distance(waypoints, i, stop_idx)
